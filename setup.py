@@ -6,4 +6,5 @@ setup(name='paddle',
       install_requires=[
           'selenium',
           'webdriver_manager',
+          'pandas'
           ])
