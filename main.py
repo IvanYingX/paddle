@@ -4,6 +4,7 @@ import pandas as pd
 import json
 
 if __name__ == '__main__':
+    print('Starting...')
     with open('credentials.json') as cred:
         credentials = json.load(cred)
     RDS_HOST = credentials['RDS_HOST']
