@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 import time
 import pandas as pd
-from utils.paddle_scraper import Scraper
+from utils.scraper import Scraper
 
 
 class PaddleScraper(Scraper):
