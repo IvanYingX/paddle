@@ -1,2 +1,5 @@
-'selenium'
-'webdriver_manager'
+selenium
+webdriver_manager
+pandas
+sqlalchemy
+psycopg2-binary
