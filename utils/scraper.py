@@ -1,3 +1,4 @@
+from tkinter import N
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
@@ -6,7 +7,7 @@ from selenium.webdriver.chrome.options import Options
 
 class Scraper:
     
-    def __init__(self, url: str, headless: bool):
+    def __init__(self, headless: bool):
         if headless:
             chrome_options = Options()
             chrome_options.add_argument("--no-sandbox")
@@ -17,7 +18,10 @@ class Scraper:
             self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options)
         else:
             self.driver = webdriver.Chrome(ChromeDriverManager().install())
-        self.driver.get(url)
+
+    def launch_page(self, webpage_address: str):
+        self.driver.get(webpage_address)
+        return self.driver.current_url
 
     def click_element(self, xpath: str):
         '''
@@ -42,7 +46,7 @@ class Scraper:
         xpath: str
             The Xpath of the Accept Cookies button
         '''
-        self.click_element(xpath)
+        self.click_element(xpath) == True
 
 
     def find_elements_in_container(self,
@@ -71,4 +75,6 @@ class Scraper:
 
         return elements_in_container
 
-    
+
+if __name__ == '__main__':
+    pass

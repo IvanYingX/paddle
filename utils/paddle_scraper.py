@@ -1,17 +1,17 @@
 from selenium.webdriver.common.by import By
 import time
 import pandas as pd
-from utils.scraper import Scraper
+from scraper import Scraper
 
 
 class PaddleScraper(Scraper):
-    def __init__(self, url: str = 'https://www.worldpadeltour.com/', headless: bool = False):
-        super().__init__(url, headless)
+    def __init__(self, headless: bool = False):
+        super().__init__(headless)
 
-        
     def search_player(self,
                       player: str,
                       xpath_search_bar: str = '//input[@class="c-form__control"]'):
+        time.sleep(2)
         self.accept_cookies()
         time.sleep(2)
         self.click_element('//a[@title="Jugadores"]')
@@ -27,14 +27,15 @@ class PaddleScraper(Scraper):
     def search_all_players(self):
         self.accept_cookies()
         time.sleep(1)
-        self.click_element('//a[@title="Jugadores"]')
-        players = self.find_elements_in_container(xpath_container='//*[@id="site-container"]/div[4]/div/div[2]/ul',
-                                                  tag_elements='li')
+        self.click_element('//li[@class="c-footer__item"]/a')
+        time.sleep(4)
+        players = self.find_elements_in_container(xpath_container='//*[@id="site-container"]/div[4]/div/div[1]/ul',
+            tag_elements='li'
+            )
         links = []
         for player in players:
             link = player.find_element(By.XPATH, './a').get_attribute('href')
             links.append(link)
-
         return links
 
     def get_info(self):
@@ -67,3 +68,12 @@ class PaddleScraper(Scraper):
             data_list.append(data)
 
         return data_list
+
+    def get_input(self):
+        example = input("Please enter your name")
+        print(example)
+
+if __name__ == '__main__':
+    scraper_obj = PaddleScraper()
+    scraper_obj.get_input()
+
